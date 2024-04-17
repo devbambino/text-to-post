@@ -151,9 +151,6 @@ export default function Chat() {
                     messages.push(tweets);
                   });
 
-
-
-
                 }}
               >
                 Generate tweets
@@ -174,7 +171,7 @@ export default function Chat() {
                   }`}
               >
                 {m.content}
-                <button onClick={() => copyText(m.content)}>Copy me</button>
+                - <button onClick={() => copyText(m.content)}>Copy me</button>
               </div>
             ))}
           </div>
