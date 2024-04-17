@@ -71,10 +71,10 @@ export default function Chat() {
           </div>
 
           <div className="space-y-2 bg-opacity-25 bg-gray-700 rounded-lg p-4">
-          {messages.length == 0 && (
-            <form className="mt-8 w-full flex flex-col">
+            {messages.length == 0 && (
+              <form className="mt-8 w-full flex flex-col">
 
-              
+
                 <input
                   id="101"
                   name="article"
@@ -83,40 +83,40 @@ export default function Chat() {
                   placeholder="Give me the article..."
                   onChange={handleChange}
                 />
-               
-              <button
-                className="space-y-2 m-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50"
-                disabled={isLoading}
-                onClick={async () => {
-                  setIsLoading(true);
-                  console.log("chat article:", state.article);
-                  const response = await fetch("api/chat", {
-                    method: "POST",
-                    headers: {
-                      "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                      message: { role: "user", content: state.article },
-                    }),
-                  });
-                  const data = await response.json();
-                  console.log("chat response:", data);
-                  setIsLoading(false);
-                  const chats: Message = {
-                    "id":"chats",
-                    "role":"assistant",
-                    "content":data.content
 
-                  };
-                  messages.push(chats);
-                  
-                  
-                }}
-              >
-                Generate post
-              </button>
-            </form>
-             )}
+                <button
+                  className="space-y-2 m-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50"
+                  disabled={isLoading}
+                  onClick={async () => {
+                    setIsLoading(true);
+                    console.log("chat article:", state.article);
+                    const response = await fetch("api/chat", {
+                      method: "POST",
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify({
+                        message: { role: "user", content: state.article },
+                      }),
+                    });
+                    const data = await response.json();
+                    console.log("chat response:", data);
+                    setIsLoading(false);
+                    const chats: Message = {
+                      "id": "chats",
+                      "role": "user",
+                      "content": data
+
+                    };
+                    messages.push(chats);
+
+
+                  }}
+                >
+                  Generate post
+                </button>
+              </form>
+            )}
             {messages.length >= 1 && !isLoading && (
               <button
                 className="space-y-4 bg-blue-500 p-2 text-white rounded shadow-xl"
@@ -135,15 +135,16 @@ export default function Chat() {
                   const data = await response.json();
                   console.log("tweets response:", data);
                   setIsLoading(false);
+                  
                   const tweets: Message = {
-                    "id":"tweets",
-                    "role":"assistant",
-                    "content":data.message.content
+                    "id": "tweets",
+                    "role": "assistant",
+                    "content": data
 
                   };
                   messages.push(tweets);
-                  
-                  
+
+
                 }}
               >
                 Generate tweets
@@ -151,19 +152,10 @@ export default function Chat() {
             )}
           </div>
 
-
-
-          <div
-
+          <div className="bg-opacity-25 bg-gray-700 rounded-lg p-4"
             hidden={
-              messages.length === 0 ||
-              messages[messages.length - 1]?.content.startsWith("Generate")
-            }
-            className="bg-opacity-25 bg-gray-700 rounded-lg p-4"
-          >
-            {messages[messages.length - 1]?.content}
-          </div>
-          <div className="bg-opacity-25 bg-gray-700 rounded-lg p-4">
+              messages.length === 0
+            }>
             {messages.map((m) => (
               <div
                 key={m.id}
@@ -172,7 +164,6 @@ export default function Chat() {
                   : "bg-slate-700 p-3 m-2 rounded-lg"
                   }`}
               >
-                {m.role === "user" ? "User: " : "AI: "}
                 {m.content}
               </div>
             ))}

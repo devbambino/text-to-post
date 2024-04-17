@@ -25,9 +25,9 @@ export async function POST(req: Request) {
     ],
   });
 
-  console.log("chat api response:", response.choices[0]);
+  console.log("api chat:", response.choices[0].message.content);
 
-  return new Response(JSON.stringify(response.choices[0].message))
+  return new Response(JSON.stringify(response.choices[0].message.content))
 
   //const stream = OpenAIStream(response);
   //return new StreamingTextResponse(stream);
