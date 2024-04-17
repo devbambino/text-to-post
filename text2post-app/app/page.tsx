@@ -6,29 +6,6 @@ import { Message, useChat } from "ai/react";
 export default function Chat() {
   const { messages, append, input, handleSubmit, handleInputChange } = useChat();
   const [isLoading, setIsLoading] = useState(false);
-  const topics = [
-    { emoji: "", value: "Work" },
-    { emoji: "", value: "People" },
-    { emoji: "", value: "Animals" },
-    { emoji: "", value: "Food" },
-    { emoji: "", value: "Coding apps" },
-  ];
-  const tones = [
-    { emoji: "", value: "Witty" },
-    { emoji: "", value: "Dark" },
-    { emoji: "", value: "Silly" },
-    { emoji: "", value: "Sarcastic" },
-    { emoji: "", value: "Goofy" },
-  ];
-  const types = [
-    { emoji: "", value: "Knock-Knock" },
-    { emoji: "", value: "Story" },
-  ];
-  const temperatures = [
-    { emoji: "", value: "low" },
-    { emoji: "", value: "medium" },
-    { emoji: "", value: "high" },
-  ];
 
   const [state, setState] = useState({
     topic: "",
@@ -51,12 +28,20 @@ export default function Chat() {
     return (
       <div className="flex justify-center items-center h-screen">
         <div className="loader">
-          <div className="animate-pulse flex space-x-4">
+          <div className="animate-pulse flex flex-col justify-center items-center ">
             <div className="rounded-full bg-slate-700 h-10 w-10"></div>
+            <div>Loading...</div>
+
           </div>
+
         </div>
+
       </div>
     );
+  }
+
+  function copyText(entryText: string){
+    navigator.clipboard.writeText(entryText);
   }
 
   return (
@@ -135,7 +120,7 @@ export default function Chat() {
                   const data = await response.json();
                   console.log("tweets response:", data);
                   setIsLoading(false);
-                  
+
                   const tweets: Message = {
                     "id": "tweets",
                     "role": "assistant",
@@ -143,6 +128,30 @@ export default function Chat() {
 
                   };
                   messages.push(tweets);
+
+                  const cleanedJsonString = data.replace(/^```json\s*|```\s*$/g, '');
+
+                  const tweetsArray = JSON.parse(cleanedJsonString);
+
+                  // Loop through each tweet and parse relevant information
+                  tweetsArray.forEach((tweet: { tweet: string; }, index: number) => {
+                    console.log(`Tweet ${index + 1}:`);
+                    console.log(`Content: ${tweet.tweet}`);
+                    const hashtags = tweet.tweet.match(/#[^\s#]+/g); // Extract hashtags
+                    if (hashtags) {
+                      console.log(`Hashtags: ${hashtags.join(', ')}`);
+                    }
+                    console.log('---------------------------------------');
+                    const tweets: Message = {
+                      "id": "tweets",
+                      "role": "assistant",
+                      "content": tweet.tweet
+
+                    };
+                    messages.push(tweets);
+                  });
+
+
 
 
                 }}
@@ -165,6 +174,7 @@ export default function Chat() {
                   }`}
               >
                 {m.content}
+                <button onClick={() => copyText(m.content)}>Copy me</button>
               </div>
             ))}
           </div>
