@@ -4,8 +4,8 @@ import { useState } from "react";
 import { Message, useChat } from "ai/react";
 
 export default function Chat() {
-  const { messages, append, isLoading, input, handleSubmit, handleInputChange } = useChat();
-  const [tweetIsLoading, setTweetIsLoading] = useState(false);
+  const { messages, append, input, handleSubmit, handleInputChange } = useChat();
+  const [isLoading, setIsLoading] = useState(false);
   const topics = [
     { emoji: "", value: "Work" },
     { emoji: "", value: "People" },
@@ -47,6 +47,18 @@ export default function Chat() {
     });
   };
 
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="loader">
+          <div className="animate-pulse flex space-x-4">
+            <div className="rounded-full bg-slate-700 h-10 w-10"></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <main className="mx-auto w-full p-24 flex flex-col">
       <div className="p4 m-4">
@@ -57,166 +69,72 @@ export default function Chat() {
               We create social networks posts for you from articles you shared with us.
             </p>
           </div>
-          {/*
-          <div className="space-y-4 bg-opacity-25 bg-gray-700 rounded-lg p-4">
-            <h3 className="text-xl font-semibold">Topic</h3>
-
-            <div className="flex flex-wrap justify-center">
-              {topics.map(({ value }) => (
-                <div
-                  key={value}
-                  className="p-4 m-2 bg-opacity-25 bg-gray-600 rounded-lg"
-                >
-                  <input
-                    id={value}
-                    type="radio"
-                    value={value}
-                    name="topic"
-                    onChange={handleChange}
-                  />
-                  <label className="ml-2" htmlFor={value}>
-                    {`${value}`}
-                  </label>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="space-y-4 bg-opacity-25 bg-gray-700 rounded-lg p-4">
-            <h3 className="text-xl font-semibold">Tones</h3>
-
-            <div className="flex flex-wrap justify-center">
-              {tones.map(({ value }) => (
-                <div
-                  key={value}
-                  className="p-4 m-2 bg-opacity-25 bg-gray-600 rounded-lg"
-                >
-                  <input
-                    id={value}
-                    type="radio"
-                    name="tone"
-                    value={value}
-                    onChange={handleChange}
-                  />
-                  <label className="ml-2" htmlFor={value}>
-                    {`${value}`}
-                  </label>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="space-y-4 bg-opacity-25 bg-gray-700 rounded-lg p-4">
-            <h3 className="text-xl font-semibold">Types</h3>
-
-            <div className="flex flex-wrap justify-center">
-              {types.map(({ value }) => (
-                <div
-                  key={value}
-                  className="p-4 m-2 bg-opacity-25 bg-gray-600 rounded-lg"
-                >
-                  <input
-                    id={value}
-                    type="radio"
-                    name="type"
-                    value={value}
-                    onChange={handleChange}
-                  />
-                  <label className="ml-2" htmlFor={value}>
-                    {`${value}`}
-                  </label>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="space-y-4 bg-opacity-25 bg-gray-700 rounded-lg p-4">
-            <h3 className="text-xl font-semibold">Level of fun</h3>
-
-            <div className="flex flex-wrap justify-center">
-              {temperatures.map(({ value }) => (
-                <div
-                  key={value}
-                  className="p-4 m-2 bg-opacity-25 bg-gray-600 rounded-lg"
-                >
-                  <input
-                    id={value}
-                    type="radio"
-                    name="temperature"
-                    value={value}
-                    onChange={handleChange}
-                  />
-                  <label className="ml-2" htmlFor={value}>
-                    {`${value}`}
-                  </label>
-                </div>
-              ))}
-            </div>
-          </div>
-          */}
-
-          <div className="space-y-4 bg-opacity-25 bg-gray-700 rounded-lg p-4">
-            <h3 className="text-xl font-semibold">Level of fun</h3>
-
-            <div className="flex flex-wrap justify-center">
-              {temperatures.map(({ value }) => (
-                <div
-                  key={value}
-                  className="p-4 m-2 bg-opacity-25 bg-gray-600 rounded-lg"
-                >
-                  <input
-                    id={value}
-                    type="radio"
-                    name="temperature"
-                    value={value}
-                    onChange={handleChange}
-                  />
-                  <label className="ml-2" htmlFor={value}>
-                    {`${value}`}
-                  </label>
-                </div>
-              ))}
-            </div>
-          </div>
 
           <div className="space-y-2 bg-opacity-25 bg-gray-700 rounded-lg p-4">
-            <form onSubmit={handleSubmit} className="mt-8 w-full flex flex-col">
+          {messages.length == 0 && (
+            <form className="mt-8 w-full flex flex-col">
 
-              {messages.length == 0 && (
+              
                 <input
+                  id="101"
+                  name="article"
                   className="w-full p-2 border border-gray-300 rounded shadow-xl text-black"
                   disabled={isLoading}
-                  value={input}
                   placeholder="Give me the article..."
-                  onChange={handleInputChange}
-
-                />)}
+                  onChange={handleChange}
+                />
+               
               <button
                 className="space-y-2 m-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50"
                 disabled={isLoading}
-                type="submit"
+                onClick={async () => {
+                  setIsLoading(true);
+                  console.log("chat article:", state.article);
+                  const response = await fetch("api/chat", {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                      message: { role: "user", content: state.article },
+                    }),
+                  });
+                  const data = await response.json();
+                  console.log("chat response:", data);
+                  setIsLoading(false);
+                  const chats: Message = {
+                    "id":"chats",
+                    "role":"assistant",
+                    "content":data.content
+
+                  };
+                  messages.push(chats);
+                  
+                  
+                }}
               >
                 Generate post
               </button>
             </form>
-            {messages.length == 2 && !isLoading && !tweetIsLoading && (
+             )}
+            {messages.length >= 1 && !isLoading && (
               <button
                 className="space-y-4 bg-blue-500 p-2 text-white rounded shadow-xl"
-                disabled={tweetIsLoading}
+                disabled={isLoading}
                 onClick={async () => {
-                  setTweetIsLoading(true);
+                  setIsLoading(true);
                   const response = await fetch("api/tweets", {
                     method: "POST",
                     headers: {
                       "Content-Type": "application/json",
                     },
                     body: JSON.stringify({
-                      message: { role: "user", content: messages[messages.length - 1].content },
+                      message: { role: "user", content: messages[0].content },
                     }),
                   });
                   const data = await response.json();
                   console.log("tweets response:", data);
-                  setTweetIsLoading(false);
+                  setIsLoading(false);
                   const tweets: Message = {
                     "id":"tweets",
                     "role":"assistant",
