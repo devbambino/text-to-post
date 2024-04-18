@@ -4,15 +4,10 @@ import { useState } from "react";
 import { Message, useChat } from "ai/react";
 
 export default function Chat() {
-  const { messages, append, input, handleSubmit, handleInputChange } = useChat();
+  const { messages} = useChat();
   const [isLoading, setIsLoading] = useState(false);
-  let tweetsArray: Message[] = [];
 
   const [state, setState] = useState({
-    topic: "",
-    tone: "",
-    type: "",
-    temperature: "",
     article: ""
   });
 
@@ -107,7 +102,7 @@ export default function Chat() {
                 }}
               >Generate summary</button>
 
-              {messages.length == 1 && tweetsArray.length == 0 && !isLoading && (
+              {messages.length == 1 && !isLoading && (
                 <button
                   className="w-full md:w-auto order-1 md:order-2 m-2 bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50" disabled={isLoading}
                   onClick={async () => {
@@ -128,32 +123,16 @@ export default function Chat() {
                     const tweetsJson = JSON.parse(cleanedJsonString);
                     // Loop through each tweet and parse relevant information
                     tweetsJson.forEach((tweet: { tweet: string; }, index: number) => {
-                      console.log(`Tweet ${index + 1}:`);
-                      console.log(`Content: ${tweet.tweet}`);
-                      const hashtags = tweet.tweet.match(/#[^\s#]+/g); // Extract hashtags
-                      if (hashtags) {
-                        console.log(`Hashtags: ${hashtags.join(', ')}`);
-                      }
-                      console.log('---------------------------------------');
                       const tweets: Message = {
                         "id": "tweets",
                         "role": "assistant",
                         "content": tweet.tweet
 
                       };
-                      //tweetsArray.push(tweets);
                       messages.push(tweets);
                     });
 
                     setIsLoading(false);
-
-                    /*const tweets: Message = {
-                      "id": "tweets",
-                      "role": "assistant",
-                      "content": data
-
-                    };
-                    messages.push(tweets);*/
 
                   }}>
                   Generate tweets
