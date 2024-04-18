@@ -7,9 +7,13 @@ Next.js app that uses GenAI to create social networks ready texts to be posted i
 For downloading other models click [here](https://huggingface.co/models?pipeline_tag=text-generation&sort=downloads)
 
 https://huggingface.co/models?search=gguf
+
 https://huggingface.co/MaziyarPanahi/WizardLM-2-7B-GGUF
+
 https://huggingface.co/jetmoe/jetmoe-8b
+
 https://huggingface.co/stabilityai/StableBeluga-7B
+
 https://huggingface.co/microsoft/WizardLM-2-7B
 
 ### How to install text gen webui
@@ -23,3 +27,5 @@ https://huggingface.co/microsoft/WizardLM-2-7B
 ### Testing
 
 https://www.dazeddigital.com/beauty/article/62371/1/why-dont-rich-people-eat-anymore-ozempic-extreme-fasting-supplements?utm_source=pocket-newtab-en-us
+
+https://www.mayoclinic.org/healthy-lifestyle/weight-loss/in-depth/weight-loss/art-20047752
