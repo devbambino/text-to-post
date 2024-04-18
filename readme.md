@@ -19,10 +19,11 @@ https://huggingface.co/microsoft/WizardLM-2-7B
 ### How to install text gen webui
 
 1) Clone `git clone https://github.com/oobabooga/text-generation-webui` or [download](https://github.com/oobabooga/text-generation-webui/archive/refs/heads/main.zip) the repository.
-2) Run the `./start_linux.sh`
-3) Select your GPU vendor when asked.
-4) Once the installation ends, browse to `http://localhost:7860/?__theme=dark`.
-5) Have fun!
+2) Add to CMD-FLGS.txt: `--model WizardLM-2-7B.Q4_K_M.gguf --api --cpu`
+3) Run the `./start_linux.sh`
+4) Select your GPU vendor when asked.
+5) Once the installation ends, browse to `http://localhost:7860/?__theme=dark`.
+6) Have fun!
 
 ### Testing
 
