@@ -45,9 +45,3 @@ To install text-gen-webui and run the api:
 2) Add to CMD-FLGS.txt: `--model WizardLM-2-7B.Q4_K_M.gguf --api --cpu`
 3) Run the `./start_linux.sh`
 4) Once the installation ends, browse to `http://localhost:7860/?__theme=dark`.
-
-### Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
