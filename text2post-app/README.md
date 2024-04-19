@@ -16,13 +16,23 @@ Here's what you get:
 
 ## Images
 
-<img src="res/influGPT-1.png" width="100" height="100">
-![The Home](res/influGPT-1.png)
-![Processing](res/influGPT-2.png)
-![Generated post for Linkedin](res/influGPT-3.png)
-![Easy and quick share to Linkedin](res/influGPT-4.png)
-![Generated posts for Twitter](res/influGPT-5.png)
-![Easy and quick share to Twitter](res/influGPT-6.png)
+### The home screen
+<img src="res/influGPT-1.png" width="400" height="400">
+
+### Processing screen
+<img src="res/influGPT-2.png" width="400" height="400">
+
+### Generated post for Linkedin
+<img src="res/influGPT-3.png" width="400" height="400">
+
+### Easy and quick share to Linkedin
+<img src="res/influGPT-4.png" width="400" height="400">
+
+### Generated posts for Twitter
+<img src="res/influGPT-5.png" width="400" height="400">
+
+### Easy and quick share to Twitter
+<img src="res/influGPT-6.png" width="400" height="400">
 
 ## Tech behind
 
