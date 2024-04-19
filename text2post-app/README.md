@@ -2,6 +2,14 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
+Images
+![The Home](res/influGPT-1.png)
+![Processing](res/influGPT-2.png)
+![Generated post for Linkedin](res/influGPT-3.png)
+![Easy and quick share to Linkedin](res/influGPT-4.png)
+![Generated posts for Twitter](res/influGPT-5.png)
+![Easy and quick share to Twitter](res/influGPT-6.png)
+
 First, run the development server:
 
 ```bash
