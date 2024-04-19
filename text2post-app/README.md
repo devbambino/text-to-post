@@ -14,7 +14,7 @@ Here's what you get:
 
 - 🎉 **User-Friendly Interface**: Enjoy a responsive web app experience with a sleek, modern design by tailwindCSS.
 
-## Images
+## Screenshots
 
 ### The home screen
 <img src="res/influGPT-1.png" width="400" height="400">
@@ -36,9 +36,9 @@ Here's what you get:
 
 ## Tech behind
 
-This app is running the connecting locally to the LLM using an API.
+This app is connecting locally to the LLM using the text-gen-webui API.
 
-### How to install text gen webui
+### How to install text gen webui and the LLM
 
 To install text-gen-webui and run the api: 
 1) Clone `git clone https://github.com/oobabooga/text-generation-webui` or [download](https://github.com/oobabooga/text-generation-webui/archive/refs/heads/main.zip) the repository.
