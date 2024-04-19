@@ -23,3 +23,5 @@ https://huggingface.co/microsoft/WizardLM-2-7B
 ### Testing
 
 https://www.dazeddigital.com/beauty/article/62371/1/why-dont-rich-people-eat-anymore-ozempic-extreme-fasting-supplements?utm_source=pocket-newtab-en-us
+
+https://www.mayoclinic.org/healthy-lifestyle/weight-loss/in-depth/weight-loss/art-20047752

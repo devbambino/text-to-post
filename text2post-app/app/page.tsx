@@ -27,7 +27,7 @@ export default function Chat() {
         <div className="loader">
           <div className="animate-pulse flex flex-col justify-center items-center ">
             <div className="rounded-full bg-slate-700 h-10 w-10"></div>
-            <div>Loading...</div>
+            <div>The magic is happening...bear with us...</div>
           </div>
         </div>
       </div>
@@ -144,7 +144,7 @@ export default function Chat() {
               </p>
               <a
                 className="hover:bg-green-700 text-white rounded disabled:opacity-50"
-                href="https://www.linkedin.com/sharing/share-offsite/" target="_blank"
+                href="https://www.linkedin.com/feed/?linkOrigin=LI_BADGE&shareActive=true" target="_blank"
                 onClick={() => copyText(messages[0].content)}>
                 <Image
                   src="/images/linkedin-128.png" // Route of the image file
